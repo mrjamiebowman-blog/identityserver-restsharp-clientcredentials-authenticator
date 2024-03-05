@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8A4E56A6-1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJB.IdentityServer.RestSharp.Console", "src\MrJB.IdentityServer.RestSharp.Console\MrJB.IdentityServer.RestSharp.Console.csproj", "{0F120FC0-4B7E-46BC-AE29-3A19CF97E539}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJB.IdentityServer.Api", "src\MrJB.IdentityServer.Api\MrJB.IdentityServer.Api.csproj", "{FBDD50D7-AA91-4608-A0CC-087AE7FF4FE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJB.IdentityServer", "src\MrJB.IdentityServer\MrJB.IdentityServer.csproj", "{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,12 +25,22 @@ Global
 		{0F120FC0-4B7E-46BC-AE29-3A19CF97E539}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F120FC0-4B7E-46BC-AE29-3A19CF97E539}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F120FC0-4B7E-46BC-AE29-3A19CF97E539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBDD50D7-AA91-4608-A0CC-087AE7FF4FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBDD50D7-AA91-4608-A0CC-087AE7FF4FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBDD50D7-AA91-4608-A0CC-087AE7FF4FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBDD50D7-AA91-4608-A0CC-087AE7FF4FE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0F120FC0-4B7E-46BC-AE29-3A19CF97E539} = {4242606B-FF23-4FD9-9C0F-8C72DF737B95}
+		{FBDD50D7-AA91-4608-A0CC-087AE7FF4FE3} = {4242606B-FF23-4FD9-9C0F-8C72DF737B95}
+		{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4} = {4242606B-FF23-4FD9-9C0F-8C72DF737B95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {40586804-320D-4F50-9957-A4C75B09B6F7}
