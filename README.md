@@ -1,2 +1,2 @@
-# identityserver-restsharp-clientcredentials-authenticator
-IdentityServer: RestSharp Client Credentials Authenticator
+# IdentityServer: RestSharp Client Credentials Authenticator
+Tutorial on how to authenticate using Client Credentials with RestSharp.   
