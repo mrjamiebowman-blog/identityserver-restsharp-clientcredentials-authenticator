@@ -25,6 +25,9 @@ do
 
     if (keyInfo.Key == ConsoleKey.T) {
         Log.Information("Running Auth Test...");
+
+        // make api call
+
         break;
     }
 } while (true);
