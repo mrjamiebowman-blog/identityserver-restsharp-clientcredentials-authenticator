@@ -13,11 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4242606B-FF2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8A4E56A6-1042-4320-9CBA-C6DE018C593F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJB.IdentityServer.RestSharp.Console", "src\MrJB.IdentityServer.RestSharp.Console\MrJB.IdentityServer.RestSharp.Console.csproj", "{0F120FC0-4B7E-46BC-AE29-3A19CF97E539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrJB.IdentityServer.RestSharp.Console", "src\MrJB.IdentityServer.RestSharp.Console\MrJB.IdentityServer.RestSharp.Console.csproj", "{0F120FC0-4B7E-46BC-AE29-3A19CF97E539}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJB.IdentityServer.Api", "src\MrJB.IdentityServer.Api\MrJB.IdentityServer.Api.csproj", "{FBDD50D7-AA91-4608-A0CC-087AE7FF4FE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrJB.IdentityServer.Api", "src\MrJB.IdentityServer.Api\MrJB.IdentityServer.Api.csproj", "{FBDD50D7-AA91-4608-A0CC-087AE7FF4FE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJB.IdentityServer", "src\MrJB.IdentityServer\MrJB.IdentityServer.csproj", "{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrJB.IdentityServer", "src\MrJB.IdentityServer\MrJB.IdentityServer.csproj", "{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspire", "aspire", "{9479CA60-5ED7-442F-B694-B295B3EB0510}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJB.IdentityServer.Aspire.Host", "src\MrJB.IdentityServer.Aspire.Host\MrJB.IdentityServer.Aspire.Host.csproj", "{0827D2F4-CADC-4B55-AAF2-1BC9BBE55AA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrJB.IdentityServer.Aspire.ServiceDefaults", "src\MrJB.IdentityServer.Aspire.ServiceDefaults\MrJB.IdentityServer.Aspire.ServiceDefaults.csproj", "{A501989D-3BD7-4015-BAC7-FB113597054C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +43,14 @@ Global
 		{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0827D2F4-CADC-4B55-AAF2-1BC9BBE55AA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0827D2F4-CADC-4B55-AAF2-1BC9BBE55AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0827D2F4-CADC-4B55-AAF2-1BC9BBE55AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0827D2F4-CADC-4B55-AAF2-1BC9BBE55AA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A501989D-3BD7-4015-BAC7-FB113597054C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A501989D-3BD7-4015-BAC7-FB113597054C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A501989D-3BD7-4015-BAC7-FB113597054C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A501989D-3BD7-4015-BAC7-FB113597054C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +59,8 @@ Global
 		{0F120FC0-4B7E-46BC-AE29-3A19CF97E539} = {4242606B-FF23-4FD9-9C0F-8C72DF737B95}
 		{FBDD50D7-AA91-4608-A0CC-087AE7FF4FE3} = {4242606B-FF23-4FD9-9C0F-8C72DF737B95}
 		{6C0C7E5E-0F76-4D95-995C-448E4ACA49A4} = {4242606B-FF23-4FD9-9C0F-8C72DF737B95}
+		{0827D2F4-CADC-4B55-AAF2-1BC9BBE55AA1} = {9479CA60-5ED7-442F-B694-B295B3EB0510}
+		{A501989D-3BD7-4015-BAC7-FB113597054C} = {9479CA60-5ED7-442F-B694-B295B3EB0510}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {40586804-320D-4F50-9957-A4C75B09B6F7}
