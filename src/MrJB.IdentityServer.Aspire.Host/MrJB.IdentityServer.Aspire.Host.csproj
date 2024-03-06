@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MrJB.IdentityServer.Api\MrJB.IdentityServer.Api.csproj" />
+    <ProjectReference Include="..\MrJB.IdentityServer.RestSharp.Console\MrJB.IdentityServer.RestSharp.Console.csproj" />
     <ProjectReference Include="..\MrJB.IdentityServer\MrJB.IdentityServer.csproj" />
   </ItemGroup>
 
