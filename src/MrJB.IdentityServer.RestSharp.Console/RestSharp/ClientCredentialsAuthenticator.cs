@@ -1,6 +1,7 @@
 ﻿using MrJB.IdentityServer.RestSharp.Console.Configuration;
 using RestSharp;
 using RestSharp.Authenticators;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace MrJB.IdentityServer.RestSharp.Console.RestSharp;
 
@@ -23,7 +24,12 @@ public class ClientCredentialsAuthenticator : AuthenticatorBase
         // get token
         Token = string.IsNullOrEmpty(Token) ? await GetTokenAsync() : Token;
 
-        // validate token
+        // validate token expiration
+        var jwt = new JwtSecurityToken(Token);
+
+        if (jwt.ValidTo.AddMinutes(-5) <= DateTime.UtcNow) {
+            Token = await GetTokenAsync();
+        }
 
         // append token to header
         return new HeaderParameter(KnownHeaders.Authorization, $"Bearer {Token}");
