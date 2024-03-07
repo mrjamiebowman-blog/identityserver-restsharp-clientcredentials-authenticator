@@ -39,6 +39,9 @@ public class ClientCredentialsAuthenticator : AuthenticatorBase
     {
         try
         {
+            // logger
+            _logger.Information("Requesting new token from IdentityServer...");
+
             // restsharp client
             var authClient = new RestClient($"{_apiClientConfiguration.IdentityServerUrl}");
 
