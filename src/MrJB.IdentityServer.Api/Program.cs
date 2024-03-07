@@ -1,6 +1,15 @@
+using Bogus;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using MrJB.IdentityServer.Api.Models;
+using Serilog;
+
+// logging
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
+
+Log.Information("Starting up");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +28,8 @@ builder.Services.AddAuthentication()
                 {
                     o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
                         ValidateIssuerSigningKey = true,
 
                         SignatureValidator = delegate (string token, TokenValidationParameters parameters)
@@ -34,7 +43,9 @@ builder.Services.AddAuthentication()
                     {
                         OnAuthenticationFailed = (c) =>
                         {
+                            
                             var errorMessage = c.Exception.Message;
+                            Log.Error("UnAuthorized: {error}", errorMessage);
                             return Task.CompletedTask;
                         }
                     };
@@ -47,7 +58,6 @@ builder.Services.AddAuthorizationBuilder()
         policy
             .RequireClaim("scope", "api1"));
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -59,17 +69,18 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/customers", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new Customer
-        (
-            //DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            //Random.Shared.Next(-20, 55),
-            //summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+app.MapGet("/up", () => {
+    return "UP";
+});
+
+app.MapGet("/customers", () => {
+    var customerFaker = new Faker<Customer>()
+        .RuleFor(x => x.CustomerName, (f, u) => f.Name.FullName())
+        .RuleFor(x => x.Email, (f, u) => f.Internet.Email(u.CustomerName))       
+    ;
+
+    var customer = customerFaker.Generate();
+    return customer;
 })
 .WithName("GetCustomers")
 .RequireAuthorization("protected_api")

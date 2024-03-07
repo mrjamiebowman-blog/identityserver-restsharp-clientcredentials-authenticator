@@ -6,10 +6,15 @@ namespace MrJB.IdentityServer.RestSharp.Console.RestSharp;
 
 public class ClientCredentialsAuthenticator : AuthenticatorBase 
 {
+    // logging
+    private readonly Serilog.ILogger _logger;
+    
+    // config
     readonly ApiClientConfiguration _apiClientConfiguration;
 
-    public ClientCredentialsAuthenticator(ApiClientConfiguration apiClientConfiguration) : base("")
+    public ClientCredentialsAuthenticator(Serilog.ILogger logger, ApiClientConfiguration apiClientConfiguration) : base("")
     {
+        _logger = logger;
         _apiClientConfiguration = apiClientConfiguration;
     }
 
@@ -26,22 +31,27 @@ public class ClientCredentialsAuthenticator : AuthenticatorBase
 
     public async Task<string> GetTokenAsync()
     {
-        // restsharp client
-        var authClient = new RestClient($"{_apiClientConfiguration.IdentityServerUrl}");
+        try
+        {
+            // restsharp client
+            var authClient = new RestClient($"{_apiClientConfiguration.IdentityServerUrl}");
 
-        // auth request
-        var request = new RestRequest("connect/token");
-        request.AddParameter("client_id", _apiClientConfiguration.ClientId);
-        request.AddParameter("client_secret", _apiClientConfiguration.ClientSecret);
-        request.AddParameter("grant_type", "client_credentials");
-        request.AddParameter("scope", "api.all");
+            // auth request
+            var request = new RestRequest("connect/token");
+            request.AddParameter("client_id", _apiClientConfiguration.ClientId);
+            request.AddParameter("client_secret", _apiClientConfiguration.ClientSecret);
+            request.AddParameter("grant_type", "client_credentials");
+            request.AddParameter("scope", "scope1");
 
-        // response
-        var access_token = authClient.Post<TokenResponse>(request);
+            // response
+            var access_token = await authClient.PostAsync<TokenResponse>(request);
 
-        // set token
-        Token = access_token.AccessToken;
-
-        return access_token.AccessToken;
+            // set token
+            Token = access_token?.AccessToken ?? "";
+            return Token;
+        } catch (Exception ex) {
+            _logger.Error("ClientCredentialsAuthenticator.GetTokenAsync() Error: {error}", ex.Message);
+            throw ex;
+        }
     }
 }

@@ -1,6 +1,9 @@
-﻿using MrJB.IdentityServer.RestSharp.Console.Configuration;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using MrJB.IdentityServer.RestSharp.Console.Configuration;
 using MrJB.IdentityServer.RestSharp.Console.Models;
 using MrJB.IdentityServer.RestSharp.Console.Models.Queries;
+using MrJB.IdentityServer.RestSharp.Console.RestSharp;
 using RestSharp;
 
 namespace MrJB.IdentityServer.RestSharp.Console.Services;
@@ -8,6 +11,7 @@ namespace MrJB.IdentityServer.RestSharp.Console.Services;
 public class ApiClientService : IApiClientService, IDisposable
 {
     // logging
+    private readonly Serilog.ILogger _logger;
 
     // services
     public RestClient RestClient { get; set; }
@@ -15,9 +19,21 @@ public class ApiClientService : IApiClientService, IDisposable
     // configuration
     private readonly ApiClientConfiguration _apiClientConfiguration;
 
-    public ApiClientService(ApiClientConfiguration apiClientConfiguration)
+    public ApiClientService(Serilog.ILogger logger, ApiClientConfiguration apiClientConfiguration)
     {
+        // logging
+        _logger = logger;
+
+        // config
         _apiClientConfiguration = apiClientConfiguration;
+
+        // restsharp
+        var options = new RestClientOptions(apiClientConfiguration.ApiUrl) {
+            Authenticator = new ClientCredentialsAuthenticator(_logger, apiClientConfiguration)
+        };
+
+        // set rest client
+        RestClient = new RestClient(options);
     }
 
     /// <summary>
@@ -27,35 +43,23 @@ public class ApiClientService : IApiClientService, IDisposable
     /// <param name="query"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<IList<Customer>> GetCustomerAsync(GetCustomerQuery query, CancellationToken cancellationToken = default)
+    public async Task<Customer?> GetCustomerAsync(GetCustomerQuery query, CancellationToken cancellationToken = default)
     {
-        // users
-        var data = new List<Customer>();
-
         try
         {
             // auth request
             var request = new RestRequest("customers");
 
-            // parameters
-            //if (query.StartDate != null)
-            //{
-            //    request.AddParameter("startDate", query.StartDate.ToString());
-            //}
-            //if (query.EndDate != null)
-            //{
-            //    request.AddParameter("endDate", query.EndDate.ToString());
-            //}
-
             // response
-            data = await RestClient.GetAsync<List<Customer>>(request);
+            var data = await RestClient.GetAsync<Customer>(request,
+                                                           cancellationToken: cancellationToken);
+
+            return data;
         }
         catch (Exception ex)
         {
             throw ex;
         }
-
-        return data;
     }
 
     public void Dispose()

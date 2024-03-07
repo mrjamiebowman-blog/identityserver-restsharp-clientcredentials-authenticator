@@ -5,5 +5,5 @@ namespace MrJB.IdentityServer.RestSharp.Console.Services;
 
 public interface IApiClientService
 {
-    Task<IList<Customer>> GetCustomerAsync(GetCustomerQuery query, CancellationToken cancellationToken = default);
+    Task<Customer?> GetCustomerAsync(GetCustomerQuery query, CancellationToken cancellationToken = default);
 }
