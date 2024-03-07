@@ -18,6 +18,9 @@ var apiClientService = new ApiClientService(Log.Logger, apiClientConfiguration);
 // cancellation token
 CancellationTokenSource cts = new CancellationTokenSource();
 
+// cancel after 10 mins
+cts.CancelAfter(600); 
+
 // count
 var count = 0;
 
@@ -40,9 +43,4 @@ do
 
     // wait 3 seconds
     await Task.Delay(3000);
-    
-    if (count == 20) {
-        // exit after 20
-        cts.Cancel();
-    }
 } while (!cts.IsCancellationRequested);
