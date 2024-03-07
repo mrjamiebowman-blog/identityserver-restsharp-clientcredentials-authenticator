@@ -58,6 +58,7 @@ public class ApiClientService : IApiClientService, IDisposable
         }
         catch (Exception ex)
         {
+            _logger.Error("ApiClientService.GetCustomerAsync() Error: {error}", ex.Message);
             throw ex;
         }
     }

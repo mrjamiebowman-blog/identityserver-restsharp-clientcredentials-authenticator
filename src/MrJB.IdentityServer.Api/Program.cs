@@ -1,4 +1,5 @@
 using Bogus;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using MrJB.IdentityServer.Api.Models;
@@ -24,16 +25,24 @@ builder.Services.AddCors();
 
 // authentication
 builder.Services.AddAuthentication()
-                .AddJwtBearer(o =>
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, o =>
                 {
+                    //o.Authority = $"http://localhost:5000";
+                    o.Audience = $"http://localhost:5000/resources";
+
                     o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
                         ValidateIssuer = false,
                         ValidateAudience = false,
-                        ValidateIssuerSigningKey = true,
+                        ValidateIssuerSigningKey = false,
+                        ValidateLifetime = false,
+                        //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secret"))
 
-                        SignatureValidator = delegate (string token, TokenValidationParameters parameters)
-                        {
+                        RequireSignedTokens = false,
+                        RequireExpirationTime = true,
+                        ClockSkew = TimeSpan.Zero,
+
+                        SignatureValidator = delegate (string token, TokenValidationParameters parameters) {
                             var jwt = new JsonWebToken(token);
                             return jwt;
                         }
@@ -41,6 +50,12 @@ builder.Services.AddAuthentication()
 
                     o.Events = new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents()
                     {
+                        OnTokenValidated = (c) =>
+                        {
+                            Log.Information("Token Validated: {token}", c.SecurityToken.ToString());
+                            return Task.CompletedTask;
+                        },
+
                         OnAuthenticationFailed = (c) =>
                         {
                             
@@ -56,7 +71,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddAuthorizationBuilder()
     .AddPolicy("protected_api", policy =>
         policy
-            .RequireClaim("scope", "api1"));
+            .RequireClaim("scope", "scope1"));
 
 var app = builder.Build();
 

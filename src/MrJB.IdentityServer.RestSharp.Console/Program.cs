@@ -38,11 +38,11 @@ do
     // increment count
     count++;
 
-    // wait 1 second
-    await Task.Delay(1000);
+    // wait 3 seconds
+    await Task.Delay(3000);
     
-    if (count == 10) {
-        // exit after 10
+    if (count == 20) {
+        // exit after 20
         cts.Cancel();
     }
 } while (!cts.IsCancellationRequested);
